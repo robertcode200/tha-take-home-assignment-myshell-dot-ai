@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import jszip from 'jszip';
 
-export async function readXmlStringFromDocxFile (docxFilePath: string, xmlFilePath: string) {    
+export async function readXmlStringFromDocxFile (docxFilePath: string, xmlFilePath: string): Promise<string> {    
     if (!docxFilePath || !xmlFilePath) {
         throw new Error(`Need to provide the non-empty path to continue the process in the function readXmlStringFromDocxFile.`);
     }
