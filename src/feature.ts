@@ -1,8 +1,39 @@
 import { getDocumentAndStylesXmlStringsObject } from './utils/docx';
 import { parseStylesXmlStringToDefaultStyleObject } from './utils/xml/styles';
 import { parseDocumentXmlStringToWordRunCollection, parseWordRunNodeCollectionToWordNodes } from './utils/xml/document';
+import { typeWordNode, typeDefaultStyleObject, typeResultCheckObject } from './types';
 
-export async function runFeatureProcess (docxFilePath: string) {
+function handleChecksReturnResultCheckObject(
+    wordNodes: typeWordNode[],
+    defaultStyleObject: typeDefaultStyleObject,
+): typeResultCheckObject {
+    const [firstWordNode, secondWordNode, thirdWordNode] = wordNodes;
+
+    let isFirstWordBold: boolean = false;
+    if (firstWordNode.styleBold || defaultStyleObject.styleBold === '1') {
+        isFirstWordBold = true;
+    }
+
+    // ------------------------------------------------------------------------------------------
+
+    let isSecondWordUnderlined: boolean = false;
+    if (secondWordNode.styleUnderline || defaultStyleObject.styleUnderline) {
+        isSecondWordUnderlined = true;
+    }
+
+    // ------------------------------------------------------------------------------------------
+
+    const thirdWordTextSize: string = thirdWordNode.styleTextSize || defaultStyleObject.styleTextSize;
+
+    // ------------------------------------------------------------------------------------------
+
+    const resultCheckObject = { isFirstWordBold, isSecondWordUnderlined, thirdWordTextSize };
+    return resultCheckObject;
+}
+
+export async function runFeatureProcess(
+    docxFilePath: string,
+): Promise<typeResultCheckObject> {
     if (!docxFilePath) {
         throw new Error(`Need to provide the non-empty docxFilePath to continue the process in the function runFeatureProcess.`);
     }
@@ -21,4 +52,7 @@ export async function runFeatureProcess (docxFilePath: string) {
     // console.log(wordRunCollection.length);
     const wordNodes = parseWordRunNodeCollectionToWordNodes(wordRunCollection);
     // console.log(wordNodes);
+
+    const resultCheckObject = handleChecksReturnResultCheckObject(wordNodes, defaultStyleObject);
+    return resultCheckObject;
 }
