@@ -1,4 +1,5 @@
 import { getDocumentAndStylesXmlStringsObject } from './utils/docx';
+import { parseToDefaultStyleObjectFromStylesXmlString } from './utils/xml/styles';
 
 export async function runFeatureProcess (docxFilePath: string) {
     if (!docxFilePath) {
@@ -11,4 +12,7 @@ export async function runFeatureProcess (docxFilePath: string) {
     } = await getDocumentAndStylesXmlStringsObject(docxFilePath);
     // console.log(documentXmlString);
     // console.log(stylesXmlString);
+
+    const defaultStyleObject = parseToDefaultStyleObjectFromStylesXmlString(stylesXmlString);
+    console.log(defaultStyleObject);
 }
