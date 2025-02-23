@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import jszip from 'jszip';
 
-export async function readXmlStringFromDocxFile (docxFilePath: string, xmlFilePath: string): Promise<string> {    
+async function readXmlStringFromDocxFile (docxFilePath: string, xmlFilePath: string): Promise<string> {    
     if (!docxFilePath || !xmlFilePath) {
         throw new Error(`Need to provide the non-empty path to continue the process in the function readXmlStringFromDocxFile.`);
     }
@@ -25,4 +25,23 @@ export async function readXmlStringFromDocxFile (docxFilePath: string, xmlFilePa
     }
 
     return xmlString;
+}
+
+export async function getDocumentAndStylesXmlStringsObject (docxFilePath: string)
+    :Promise<{ documentXmlString: string; stylesXmlString: string; }>
+{
+    if (!docxFilePath) {
+        throw new Error(`Need to provide the non-empty docxFilePath to continue the process in the function getDocumentAndStylesXmlStringsObject.`);
+    }
+
+    const documentXmlFilePath = 'word/document.xml';
+    const stylesXmlFilePath = 'word/styles.xml';
+
+    const documentXmlString = await readXmlStringFromDocxFile(docxFilePath, documentXmlFilePath);
+    const stylesXmlString = await readXmlStringFromDocxFile(docxFilePath, stylesXmlFilePath);
+
+    return {
+        documentXmlString,
+        stylesXmlString,
+    };
 }
