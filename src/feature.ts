@@ -1,5 +1,6 @@
 import { getDocumentAndStylesXmlStringsObject } from './utils/docx';
-import { parseToDefaultStyleObjectFromStylesXmlString } from './utils/xml/styles';
+import { parseStylesXmlStringToDefaultStyleObject } from './utils/xml/styles';
+import { parseDocumentXmlStringToWordRunCollection } from './utils/xml/document';
 
 export async function runFeatureProcess (docxFilePath: string) {
     if (!docxFilePath) {
@@ -13,6 +14,9 @@ export async function runFeatureProcess (docxFilePath: string) {
     // console.log(documentXmlString);
     // console.log(stylesXmlString);
 
-    const defaultStyleObject = parseToDefaultStyleObjectFromStylesXmlString(stylesXmlString);
-    console.log(defaultStyleObject);
+    const defaultStyleObject = parseStylesXmlStringToDefaultStyleObject(stylesXmlString);
+    // console.log(defaultStyleObject);
+
+    const wordRunCollection = parseDocumentXmlStringToWordRunCollection(documentXmlString);
+    console.log(wordRunCollection.length);
 }
