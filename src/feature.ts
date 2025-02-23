@@ -3,7 +3,7 @@ import { parseStylesXmlStringToDefaultStyleObject } from './utils/xml/styles';
 import { parseDocumentXmlStringToWordRunCollection, parseWordRunNodeCollectionToWordNodes } from './utils/xml/document';
 import { typeWordNode, typeDefaultStyleObject, typeResultCheckObject } from './types';
 
-function handleChecksReturnResultCheckObject(
+function conductChecks(
     wordNodes: typeWordNode[],
     defaultStyleObject: typeDefaultStyleObject,
 ): typeResultCheckObject {
@@ -53,6 +53,6 @@ export async function runFeatureProcess(
     const wordNodes = parseWordRunNodeCollectionToWordNodes(wordRunCollection);
     // console.log(wordNodes);
 
-    const resultCheckObject = handleChecksReturnResultCheckObject(wordNodes, defaultStyleObject);
+    const resultCheckObject = conductChecks(wordNodes, defaultStyleObject);
     return resultCheckObject;
 }
