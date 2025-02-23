@@ -28,3 +28,22 @@ export function parseDocumentXmlStringToWordRunCollection(
 
     return wordRunCollection;
 }
+
+function transformWordText (wordText: string): string {
+    const transforms = [
+        {
+            regx: /(\w+)\s-\s(\w+)/g,
+            replaceWith: '$1-$2'
+        },
+        {
+            regx: /([,;.!:~?])+/g,
+            replaceWith: ''
+        }
+    ];
+
+    const transformedWordText = transforms.reduce((accumulatedWordText, { regx, replaceWith }) => {
+        return accumulatedWordText.replace(regx, replaceWith);
+    }, wordText);
+
+    return transformedWordText;
+}
