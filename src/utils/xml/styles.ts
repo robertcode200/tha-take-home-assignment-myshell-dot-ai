@@ -1,12 +1,8 @@
 import jsdom from 'jsdom';
 import { extractStyleValueAttributeFromStyleContainerElement } from './common';
+import { typeDefaultStyleObject } from '../../types';
 
-export function parseStylesXmlStringToDefaultStyleObject (stylesXmlString: string)
-    : ({
-        styleBold: string;
-        styleUnderline: string;
-        styleTextSize: string;
-    })
+export function parseStylesXmlStringToDefaultStyleObject (stylesXmlString: string): typeDefaultStyleObject
 {
     if (!stylesXmlString) {
         throw new Error(`Need to provide the non-empty stylesXmlString to continue the process in the 

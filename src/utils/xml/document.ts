@@ -1,5 +1,6 @@
 import jsdom from 'jsdom';
 import { extractStyleValueAttributeFromStyleContainerElement } from './common';
+import { typeWordNode } from '../../types';
 
 export function parseDocumentXmlStringToWordRunCollection(
     documentXmlString = "",
@@ -51,12 +52,7 @@ function transformWordText (wordText: string): string {
 
 export function parseWordRunNodeCollectionToWordNodes(
     wordRunCollection: HTMLCollectionOf<Element>,
-  ): {
-    text: string;
-    styleBold: string;
-    styleUnderline: string;
-    styleTextSize: string;
-  }[] {
+  ): typeWordNode[] {
     if (!wordRunCollection.length) {
         throw new Error(`0 wordRuns, so we cannot proceed further; we need a wordRunCollection  
             that is not empty in the function parseWordRunNodeCollectionToWordNodes so we can proceed further.`);
