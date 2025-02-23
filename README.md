@@ -10,7 +10,6 @@
 - Check package.json to check more npm scripts.
 - 检查 package.json 来查看更多 npm 脚本。
 
-![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
 ## 2. Check the images that have the same file name as the test case Word file to better check what the test case looks like in the Word Application./检查与测试用例 Word 文件具有相同文件名的图像，以更好地检查测试用例在 Word 应用程序中的样子。
 
 ## 3. Requirement/需求
