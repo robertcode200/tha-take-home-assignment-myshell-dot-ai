@@ -1,10 +1,9 @@
 import fs from 'fs/promises';
 import jszip from 'jszip';
 
-export async function readXmlStringFromDocxFile (docxFilePath: string, xmlFilePath: string) {
-    const functionName = 'readXmlStringFromDocxFile';
+export async function readXmlStringFromDocxFile (docxFilePath: string, xmlFilePath: string) {    
     if (!docxFilePath || !xmlFilePath) {
-        throw new Error(`Need to provide the non-empty path to continue the process in the function ${functionName}.`);
+        throw new Error(`Need to provide the non-empty path to continue the process in the function readXmlStringFromDocxFile.`);
     }
 
     let xmlString = '';
@@ -17,12 +16,12 @@ export async function readXmlStringFromDocxFile (docxFilePath: string, xmlFilePa
         }
         xmlString = await jSZipObject.async('string');
     } catch (e) {
-        console.error('function', functionName, e);
+        console.error('function', 'readXmlStringFromDocxFile', e);
         process.exit(1);
     }
     
     if (!xmlString) {
-        throw new Error(`The read/processed xmlString is empty in the function ${functionName} just before return.`);
+        throw new Error(`The read/processed xmlString is empty in the function readXmlStringFromDocxFile just before return.`);
     }
 
     return xmlString;
