@@ -15,8 +15,8 @@ export async function runFeatureProcess (docxFilePath: string) {
     // console.log(stylesXmlString);
 
     const defaultStyleObject = parseStylesXmlStringToDefaultStyleObject(stylesXmlString);
-    // console.log(defaultStyleObject);
+    console.log(defaultStyleObject);
 
     const wordRunCollection = parseDocumentXmlStringToWordRunCollection(documentXmlString);
-    console.log(wordRunCollection.length);
+    // console.log(wordRunCollection.length);
 }
