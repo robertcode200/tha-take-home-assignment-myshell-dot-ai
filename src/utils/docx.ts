@@ -27,9 +27,9 @@ async function readXmlStringFromDocxFile (docxFilePath: string, xmlFilePath: str
     return xmlString;
 }
 
-export async function getDocumentAndStylesXmlStringsObject (docxFilePath: string)
-    :Promise<{ documentXmlString: string; stylesXmlString: string; }>
-{
+export async function getDocumentAndStylesXmlStringsObject(
+    docxFilePath: string,
+): Promise<{ documentXmlString: string; stylesXmlString: string }> {
     if (!docxFilePath) {
         throw new Error(`Need to provide the non-empty docxFilePath to continue the process in the function getDocumentAndStylesXmlStringsObject.`);
     }
