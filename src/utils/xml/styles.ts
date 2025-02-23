@@ -15,7 +15,7 @@ export function extractStyleValueAttributeFromStyleContainerElement (
 }
 
 
-export function parseToDefaultStyleObjectFromStylesXmlString (stylesXmlString: string)
+export function parseStylesXmlStringToDefaultStyleObject (stylesXmlString: string)
     : ({
         styleBold: string;
         styleUnderline: string;
@@ -24,7 +24,7 @@ export function parseToDefaultStyleObjectFromStylesXmlString (stylesXmlString: s
 {
     if (!stylesXmlString) {
         throw new Error(`Need to provide the non-empty stylesXmlString to continue the process in the 
-            function parseToDefaultStyleObjectFromStylesXmlString.`);
+            function parseStylesXmlStringToDefaultStyleObject.`);
     }
 
     const {
@@ -34,14 +34,15 @@ export function parseToDefaultStyleObjectFromStylesXmlString (stylesXmlString: s
      } = new jsdom.JSDOM(stylesXmlString, { contentType: "text/xml"});
 
     if (!document) {
-        throw new Error(`The parsed jsdom document is undefined and cannot do further traversal.`);
+        throw new Error(`The parsed jsdom document is undefined and cannot do further traversal in the
+            function parseStylesXmlStringToDefaultStyleObject.`);
     }
     
     const tagNameDefaultRunProperties = 'w:rPrDefault';
     const rPrDefaultCollection: HTMLCollectionOf<Element> =  document.getElementsByTagName(tagNameDefaultRunProperties);
     if (!rPrDefaultCollection.length) {
         throw new Error(`Found no element tagged with the tag name ${tagNameDefaultRunProperties} in the 
-            function parseToDefaultStyleObjectFromStylesXmlString so we cannot proceed with the styles.`);
+            function parseStylesXmlStringToDefaultStyleObject so we cannot proceed with the styles.`);
     }
     const rPrDefault: Element =  rPrDefaultCollection[0];
 
